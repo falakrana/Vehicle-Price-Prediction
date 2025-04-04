@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us - Vehicle Price Prediction{% endblock %}
+
+{% block content %}
+<div class="py-12 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <div class="max-w-5xl mx-auto">
+            <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">Contact Me</h1>
+            <p class="text-gray-600 text-center mb-8 max-w-3xl mx-auto">Have questions about our vehicle price
+                prediction service? I'm here to help. Fill out the form below and we'll get back to you as soon as
+                possible.</p>
+
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <!-- Contact Form -->
+                    <div class="md:w-2/3 p-6 md:p-8">
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Send Us a Message</h2>
+
+                        <form id="contact-form" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                                    <input type="text" id="name" name="name" class="form-input"
+                                        placeholder="Enter your name" required>
+                                </div>
+
+                                <div>
+                                    <label for="email" class="block text-gray-700 font-medium mb-2">Email
+                                        Address</label>
+                                    <input type="email" id="email" name="email" class="form-input"
+                                        placeholder="Enter your email" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                                <input type="text" id="subject" name="subject" class="form-input"
+                                    placeholder="Enter subject" required>
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" class="form-input"
+                                    placeholder="Enter your message" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-primary mt-4">Send Message</button>
+                        </form>
+
+                        <div id="success-message" class="hidden mt-6 p-4 bg-green-100 text-green-700 rounded-md">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">Your message has been sent successfully! We'll get
+                                        back to you soon.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="mt-8">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Follow Us</h3>
+                        <div class="flex space-x-4">
+                            <!-- LeetCode -->
+                            <a href="https://leetcode.com/u/falakrana_30/"
+                                class="text-gray-600 hover:text-primary transition duration-300" target="_blank">
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M6.754 12l5.56-5.513L9.132 4l-6.759 6.705a1.333 1.333 0 000 1.866L9.132 19l3.182-2.487L6.754 12zm4.985 7.094l1.791 1.528 8.39-8.394a1.333 1.333 0 000-1.866L13.53 2.035l-1.791 1.528 7.656 7.437-7.656 8.094z">
+                                    </path>
+                                </svg>
+                            </a>
+                            <!-- GitHub -->
+                            <a href="https://github.com/falakrana"
+                                class="text-gray-600 hover:text-primary transition duration-300" target="_blank">
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M12 .5C5.373.5 0 5.873 0 12.5c0 5.304 3.438 9.8 8.207 11.385.6.112.82-.26.82-.577v-2.185c-3.338.724-4.04-1.417-4.04-1.417-.546-1.39-1.333-1.76-1.333-1.76-1.09-.744.083-.73.083-.73 1.205.084 1.84 1.238 1.84 1.238 1.07 1.833 2.805 1.304 3.49.998.108-.776.42-1.305.763-1.604-2.665-.305-5.466-1.333-5.466-5.93 0-1.31.467-2.38 1.238-3.22-.124-.305-.536-1.527.116-3.182 0 0 1.008-.322 3.303 1.23a11.52 11.52 0 013.008-.404c1.02.004 2.047.138 3.008.404 2.293-1.552 3.3-1.23 3.3-1.23.652 1.655.24 2.877.116 3.182.772.84 1.238 1.91 1.238 3.22 0 4.61-2.805 5.62-5.478 5.92.432.37.82 1.1.82 2.22v3.293c0 .32.216.694.825.577C20.562 22.3 24 17.804 24 12.5 24 5.873 18.627.5 12 .5z">
+                                    </path>
+                                </svg>
+                            </a>
+                            <!-- LinkedIn -->
+                            <a href="https://www.linkedin.com/in/falak-rana-125520221/"
+                                class="text-gray-600 hover:text-primary transition duration-300" target="_blank">
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8h3v8h-3zm1.5-9.5c-.966 0-1.5-.794-1.5-1.5s.534-1.5 1.5-1.5 1.5.794 1.5 1.5-.534 1.5-1.5 1.5zm5.5 9.5v-4c0-1.2.8-2 2-2s2 .8 2 2v4h-3v-4c0-.4-.2-.8-.5-.8s-.5.4-.5.8v4h-3z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const contactForm = document.getElementById('contact-form');
+        const successMessage = document.getElementById('success-message');
+
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(contactForm);
+
+            // Send contact request
+            fetch('/contact', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Contact request failed');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Show success message
+                    contactForm.reset();
+                    successMessage.classList.remove('hidden');
+
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.classList.add('hidden');
+                    }, 5000);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while sending your message. Please try again.');
+                });
+        });
+    });
+</script>
+{% endblock %}

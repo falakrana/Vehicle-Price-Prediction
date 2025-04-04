@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - Vehicle Price Prediction{% endblock %}
+
+{% block content %}
+<div class="py-12 bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4">
+        <div class="max-w-md mx-auto">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="p-6 md:p-8">
+                    <div class="flex justify-center mb-6">
+                        <div class="flex items-center">
+                            <div
+                                class="bg-gradient-to-r from-primary to-tertiary text-white font-bold px-4 py-4 rounded-full flex items-center justify-center w-10 h-10">
+                                FR</div>
+                        </div>
+                    </div>
+
+                    <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Create an Account</h1>
+
+                    <form id="register-form" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                            <input type="text" id="name" name="name" class="form-input"
+                                placeholder="Enter your full name" required>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input"
+                                placeholder="Enter your email" required>
+                        </div>
+
+                        <div>
+                            <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+                            <input type="password" id="password" name="password" class="form-input"
+                                placeholder="Enter your password" required minlength="8">
+                            <p class="text-xs text-gray-500 mt-1">Password must be at least 8 characters long</p>
+                        </div>
+
+                        <div>
+                            <label for="confirm-password" class="block text-gray-700 font-medium mb-2">Confirm
+                                Password</label>
+                            <input type="password" id="confirm-password" name="confirm-password" class="form-input"
+                                placeholder="Confirm your password" required minlength="8">
+                        </div>
+
+                        <div class="flex items-center">
+                            <input id="terms" name="terms" type="checkbox"
+                                class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded" required>
+                            <label for="terms" class="ml-2 block text-sm text-gray-700">
+                                I agree to the <a href="#" class="text-primary hover:text-accent">Terms of Service</a>
+                                and <a href="#" class="text-primary hover:text-accent">Privacy Policy</a>
+                            </label>
+                        </div>
+
+                        <div id="register-error" class="hidden p-4 bg-red-100 text-red-700 rounded-md">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium" id="error-message">Registration failed. Please try
+                                        again.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Register</button>
+                    </form>
+
+                    <div class="mt-6 text-center">
+                        <p class="text-gray-600">Already have an account? <a href="/login-page"
+                                class="text-primary hover:text-accent">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const registerForm = document.getElementById('register-form');
+        const registerError = document.getElementById('register-error');
+        const errorMessage = document.getElementById('error-message');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirm-password');
+
+        registerForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Check if passwords match
+            if (password.value !== confirmPassword.value) {
+                registerError.classList.remove('hidden');
+                errorMessage.textContent = 'Passwords do not match. Please try again.';
+                return;
+            }
+
+            // Get form data
+            const formData = new FormData(registerForm);
+            formData.delete('confirm-password'); // Remove confirm password from form data
+            formData.delete('terms'); // Remove terms checkbox from form data
+
+            // Send register request
+            fetch('/register', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(data => {
+                            throw new Error(data.message || 'Registration failed');
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Redirect to login page
+                    window.location.href = '/login-page?registered=true';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    registerError.classList.remove('hidden');
+                    errorMessage.textContent = error.message || 'An error occurred during registration. Please try again.';
+                });
+        });
+    });
+</script>
+{% endblock %}

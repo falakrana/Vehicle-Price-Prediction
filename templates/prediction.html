@@ -1,0 +1,335 @@
+{% extends 'base.html' %}
+
+{% block title %}Vehicle Price Prediction{% endblock %}
+
+{% block content %}
+<div class="py-12 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">Vehicle Price Prediction</h1>
+            <p class="text-gray-600 text-center mb-8 max-w-3xl mx-auto">Enter your vehicle details below to get an accurate price prediction based on our advanced machine learning model.</p>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <!-- Form Section -->
+                    <div class="md:w-1/2 p-6 md:p-8">
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Vehicle Details</h2>
+                        
+                        <form id="prediction-form" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Make -->
+                                <div>
+                                    <label for="make" class="block text-gray-700 font-medium mb-2">Make</label>
+                                    <select id="make" name="make" class="form-input" required>
+                                        <option value="" disabled selected>Select Make</option>
+                                        <option value="Toyota">Toyota</option>
+                                        <option value="Honda">Honda</option>
+                                        <option value="Ford">Ford</option>
+                                        <option value="Chevrolet">Chevrolet</option>
+                                        <option value="BMW">BMW</option>
+                                        <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                        <option value="Audi">Audi</option>
+                                        <option value="Nissan">Nissan</option>
+                                        <option value="Volkswagen">Volkswagen</option>
+                                        <option value="Hyundai">Hyundai</option>
+                                        <!-- Add more options based on your dataset -->
+                                    </select>
+                                </div>
+                                
+                                <!-- Model -->
+                                <div>
+                                    <label for="model" class="block text-gray-700 font-medium mb-2">Model</label>
+                                    <select id="model" name="model" class="form-input" required>
+                                        <option value="" disabled selected>Select Model</option>
+                                        <!-- Models will be populated based on selected make via JavaScript -->
+                                    </select>
+                                </div>
+                                
+                                <!-- Year -->
+                                <div>
+                                    <label for="year" class="block text-gray-700 font-medium mb-2">Year</label>
+                                    <select id="year" name="year" class="form-input" required>
+                                        <option value="" disabled selected>Select Year</option>
+                                        <!-- Generate years from 2000 to current year -->
+                                    </select>
+                                </div>
+                                
+                                <!-- Fuel Type -->
+                                <div>
+                                    <label for="fuel" class="block text-gray-700 font-medium mb-2">Fuel Type</label>
+                                    <select id="fuel" name="fuel" class="form-input" required>
+                                        <option value="" disabled selected>Select Fuel Type</option>
+                                        <option value="Gasoline">Gasoline</option>
+                                        <option value="Diesel">Diesel</option>
+                                        <option value="Hybrid">Hybrid</option>
+                                        <option value="Electric">Electric</option>
+                                        <option value="Plug-in Hybrid">Plug-in Hybrid</option>
+                                        <!-- Add more options based on your dataset -->
+                                    </select>
+                                </div>
+                                
+                                <!-- Engine -->
+                                <div>
+                                    <label for="engine" class="block text-gray-700 font-medium mb-2">Engine</label>
+                                    <select id="engine" name="engine" class="form-input" required>
+                                        <option value="" disabled selected>Select Engine</option>
+                                        <option value="1.0L">1.0L</option>
+                                        <option value="1.5L">1.5L</option>
+                                        <option value="2.0L">2.0L</option>
+                                        <option value="2.5L">2.5L</option>
+                                        <option value="3.0L">3.0L</option>
+                                        <option value="3.5L">3.5L</option>
+                                        <option value="4.0L">4.0L</option>
+                                        <option value="5.0L">5.0L</option>
+                                        <!-- Add more options based on your dataset -->
+                                    </select>
+                                </div>
+                                
+                                <!-- Transmission -->
+                                <div>
+                                    <label for="transmission" class="block text-gray-700 font-medium mb-2">Transmission</label>
+                                    <select id="transmission" name="transmission" class="form-input" required>
+                                        <option value="" disabled selected>Select Transmission</option>
+                                        <option value="Automatic">Automatic</option>
+                                        <option value="Manual">Manual</option>
+                                        <option value="CVT">CVT</option>
+                                        <option value="DCT">DCT</option>
+                                        <!-- Add more options based on your dataset -->
+                                    </select>
+                                </div>
+                                
+                                <!-- Body Type -->
+                                <div>
+                                    <label for="body" class="block text-gray-700 font-medium mb-2">Body Type</label>
+                                    <select id="body" name="body" class="form-input" required>
+                                        <option value="" disabled selected>Select Body Type</option>
+                                        <option value="Sedan">Sedan</option>
+                                        <option value="SUV">SUV</option>
+                                        <option value="Hatchback">Hatchback</option>
+                                        <option value="Coupe">Coupe</option>
+                                        <option value="Truck">Truck</option>
+                                        <option value="Van">Van</option>
+                                        <option value="Wagon">Wagon</option>
+                                        <option value="Convertible">Convertible</option>
+                                        <!-- Add more options based on your dataset -->
+                                    </select>
+                                </div>
+                                
+                                <!-- Drivetrain -->
+                                <div>
+                                    <label for="drivetrain" class="block text-gray-700 font-medium mb-2">Drivetrain</label>
+                                    <select id="drivetrain" name="drivetrain" class="form-input" required>
+                                        <option value="" disabled selected>Select Drivetrain</option>
+                                        <option value="FWD">FWD</option>
+                                        <option value="RWD">RWD</option>
+                                        <option value="AWD">AWD</option>
+                                        <option value="4WD">4WD</option>
+                                        <!-- Add more options based on your dataset -->
+                                    </select>
+                                </div>
+                                
+                                <!-- Mileage -->
+                                <div>
+                                    <label for="mileage" class="block text-gray-700 font-medium mb-2">Mileage (km)</label>
+                                    <input type="number" id="mileage" name="mileage" min="0" class="form-input" placeholder="Enter mileage" required>
+                                </div>
+                                
+                                <!-- Cylinders -->
+                                <div>
+                                    <label for="cylinders" class="block text-gray-700 font-medium mb-2">Cylinders</label>
+                                    <input type="number" id="cylinders" name="cylinders" min="0" max="12" class="form-input" placeholder="Enter cylinders" required>
+                                </div>
+                                
+                                <!-- Doors -->
+                                <div>
+                                    <label for="doors" class="block text-gray-700 font-medium mb-2">Doors</label>
+                                    <input type="number" id="doors" name="doors" min="2" max="5" class="form-input" placeholder="Enter doors" required>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary mt-6">Calculate Price</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Result Section -->
+                    <div class="md:w-1/2 bg-gradient-to-br from-primary/5 to-accent/5 p-6 md:p-8 flex flex-col">
+                        <div class="flex-grow">
+                            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Estimated Price</h2>
+                            
+                            <div id="loading" class="hidden">
+                                <div class="flex justify-center items-center h-64">
+                                    <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary"></div>
+                                </div>
+                                <p class="text-center text-gray-600">Calculating your vehicle's price...</p>
+                            </div>
+                            
+                            <div id="result-container" class="hidden">
+                                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                                    <div class="text-center">
+                                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Your Vehicle's Estimated Value</h3>
+                                        <div class="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent my-4" id="predicted-price">$0</div>
+                                        <p class="text-gray-600 text-sm">Based on current market conditions and similar vehicles</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 rounded-lg p-4 border-l-4 border-primary">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0">
+                                            <svg class="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm text-blue-700">
+                                                This estimate is based on the information you provided and our machine learning model. Actual market prices may vary based on additional factors like vehicle condition, location, and market demand.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="initial-state" class="flex flex-col items-center justify-center h-64">
+                                <img src="{{ url_for('static', filename='images/sedan.png') }}" alt="Car icon" class="w-24 h-24 mb-4 opacity-70">
+                                <p class="text-gray-500 text-center">Fill out the form to get your vehicle's estimated price</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 pt-6 border-t border-gray-200">
+                            <h3 class="font-semibold text-gray-800 mb-2">What affects your vehicle's value?</h3>
+                            <ul class="space-y-2 text-gray-600">
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-accent mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Vehicle age and depreciation rate</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-accent mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Mileage and overall condition</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-accent mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Market demand for your specific make and model</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-accent mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Optional features and specifications</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Populate year dropdown
+        const yearSelect = document.getElementById('year');
+        const currentYear = new Date().getFullYear();
+        for (let year = currentYear; year >= 2000; year--) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            yearSelect.appendChild(option);
+        }
+        
+        // Make-Model relationship (simplified example)
+        const makeModelMap = {
+            'Toyota': ['Camry', 'Corolla', 'RAV4', 'Highlander', 'Tacoma', 'Prius'],
+            'Honda': ['Civic', 'Accord', 'CR-V', 'Pilot', 'Odyssey', 'Fit'],
+            'Ford': ['F-150', 'Escape', 'Explorer', 'Mustang', 'Edge', 'Fusion'],
+            'Chevrolet': ['Silverado', 'Equinox', 'Malibu', 'Tahoe', 'Traverse', 'Camaro'],
+            'BMW': ['3 Series', '5 Series', 'X3', 'X5', '7 Series', 'X1'],
+            'Mercedes-Benz': ['C-Class', 'E-Class', 'GLC', 'GLE', 'S-Class', 'A-Class'],
+            'Audi': ['A4', 'Q5', 'A6', 'Q7', 'A3', 'Q3'],
+            'Nissan': ['Altima', 'Rogue', 'Sentra', 'Pathfinder', 'Murano', 'Maxima'],
+            'Volkswagen': ['Jetta', 'Tiguan', 'Passat', 'Atlas', 'Golf', 'Taos'],
+            'Hyundai': ['Elantra', 'Tucson', 'Santa Fe', 'Sonata', 'Kona', 'Palisade']
+        };
+        
+        // Update models when make changes
+        const makeSelect = document.getElementById('make');
+        const modelSelect = document.getElementById('model');
+        
+        makeSelect.addEventListener('change', function() {
+            const selectedMake = this.value;
+            const models = makeModelMap[selectedMake] || [];
+            
+            // Clear current options
+            modelSelect.innerHTML = '<option value="" disabled selected>Select Model</option>';
+            
+            // Add new options
+            models.forEach(model => {
+                const option = document.createElement('option');
+                option.value = model;
+                option.textContent = model;
+                modelSelect.appendChild(option);
+            });
+        });
+        
+        // Form submission
+        const predictionForm = document.getElementById('prediction-form');
+        const loadingElement = document.getElementById('loading');
+        const resultContainer = document.getElementById('result-container');
+        const initialState = document.getElementById('initial-state');
+        const predictedPriceElement = document.getElementById('predicted-price');
+        
+        predictionForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            initialState.classList.add('hidden');
+            resultContainer.classList.add('hidden');
+            loadingElement.classList.remove('hidden');
+            
+            // Get form data
+            const formData = new FormData(predictionForm);
+            
+            // Send prediction request
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Prediction request failed');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Hide loading, show result
+                loadingElement.classList.add('hidden');
+                resultContainer.classList.remove('hidden');
+                
+                // Format and display the predicted price
+                const formattedPrice = new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(data.prediction);
+                
+                predictedPriceElement.textContent = formattedPrice;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                loadingElement.classList.add('hidden');
+                initialState.classList.remove('hidden');
+                alert('An error occurred while predicting the price. Please try again.');
+            });
+        });
+    });
+</script>
+{% endblock %}
+

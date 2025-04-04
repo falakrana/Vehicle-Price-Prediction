@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us - Vehicle Price Prediction{% endblock %}
+
+{% block content %}
+<div class="bg-gray-100/50 backdrop-blur-sm py-12">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">About Our Vehicle Price Prediction</h1>
+            <div class="bg-white/70 backdrop-blur-sm border border-white/30 shadow-lg rounded-lg p-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Our Mission</h2>
+                <p class="text-gray-600 mb-6">
+                    Our mission is to provide accurate and reliable vehicle price predictions using advanced machine learning technology. 
+                    We aim to help vehicle owners, buyers, and sellers make informed decisions based on data-driven insights.
+                </p>
+                
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">The Technology Behind Our Predictions</h2>
+                <p class="text-gray-600 mb-6">
+                    Our vehicle price prediction system is powered by a sophisticated machine learning model trained on thousands of real market transactions. 
+                    We use Random Forest Regression algorithms to analyze multiple factors that influence vehicle prices, including:
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="bg-gradient-to-br from-primary/10 to-accent/10 p-4 rounded-md">
+                        <h3 class="font-semibold text-gray-800 mb-2">Vehicle Specifications</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Make and model</li>
+                            <li>Year of manufacture</li>
+                            <li>Engine type and size</li>
+                            <li>Fuel type</li>
+                            <li>Transmission type</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gradient-to-br from-primary/10 to-accent/10 p-4 rounded-md">
+                        <h3 class="font-semibold text-gray-800 mb-2">Vehicle Condition</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Mileage</li>
+                            <li>Body type</li>
+                            <li>Drivetrain</li>
+                            <li>Number of cylinders</li>
+                            <li>Number of doors</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">How Our Model Works</h2>
+                <p class="text-gray-600 mb-6">
+                    Our prediction model follows these steps to provide accurate vehicle valuations:
+                </p>
+                
+                <div class="space-y-4 mb-6">
+                    <div class="flex items-start">
+                        <div class="bg-gradient-to-r from-primary to-accent text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">1</div>
+                        <div class="ml-4">
+                            <h3 class="font-semibold text-gray-800">Data Collection</h3>
+                            <p class="text-gray-600">We collect and analyze thousands of vehicle listings and transaction data from the market.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-gradient-to-r from-primary to-accent text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">2</div>
+                        <div class="ml-4">
+                            <h3 class="font-semibold text-gray-800">Data Preprocessing</h3>
+                            <p class="text-gray-600">We clean and transform the data to prepare it for our machine learning algorithms.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-gradient-to-r from-primary to-accent text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">3</div>
+                        <div class="ml-4">
+                            <h3 class="font-semibold text-gray-800">Model Training</h3>
+                            <p class="text-gray-600">We train our Random Forest Regression model on the processed data to identify patterns and relationships.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-gradient-to-r from-primary to-accent text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">4</div>
+                        <div class="ml-4">
+                            <h3 class="font-semibold text-gray-800">Prediction Generation</h3>
+                            <p class="text-gray-600">When you input your vehicle details, our model analyzes them and generates an accurate price prediction.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Developer</h2>
+                <div class="bg-gradient-to-br from-primary/10 to-accent/10 p-6 rounded-md border-l-4 border-primary">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Falak</h3>
+                    <p class="text-gray-600">I am a Machine Learning and Web Developer passionate about data-driven applications. I developed this vehicle price prediction system using Flask for the backend and machine learning techniques for accurate price estimation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

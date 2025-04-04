@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Vehicle Price Prediction{% endblock %}
+
+{% block content %}
+<div class="py-12 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <div class="max-w-md mx-auto">
+            <div class="bg-white/70 backdrop-blur-sm border border-white/30 shadow-lg rounded-lg overflow-hidden">
+                <div class="p-6 md:p-8">
+                    <div class="flex justify-center mb-6">
+                        <div class="flex items-center">
+                            <div
+                                class="bg-gradient-to-r from-primary to-tertiary text-white font-bold px-4 py-4 rounded-full flex items-center justify-center w-10 h-10">
+                                FR</div>
+                        </div>
+                    </div>
+
+                    <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Login to Your Account</h1>
+
+                    <form id="login-form" class="space-y-4">
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input"
+                                placeholder="Enter your email" required>
+                        </div>
+
+                        <div>
+                            <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+                            <input type="password" id="password" name="password" class="form-input"
+                                placeholder="Enter your password" required>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input id="remember-me" name="remember-me" type="checkbox"
+                                    class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+                                <label for="remember-me" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                            </div>
+
+                            <div class="text-sm">
+                                <a href="#" class="text-primary hover:text-accent">Forgot your password?</a>
+                            </div>
+                        </div>
+
+                        <div id="login-error" class="hidden p-4 bg-red-100 text-red-700 rounded-md">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium" id="error-message">Invalid email or password. Please
+                                        try again.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Login</button>
+                    </form>
+
+                    <div class="mt-6 text-center">
+                        <p class="text-gray-600">Don't have an account? <a href="/register-page"
+                                class="text-primary hover:text-accent">Register now</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const loginForm = document.getElementById('login-form');
+        const loginError = document.getElementById('login-error');
+        const errorMessage = document.getElementById('error-message');
+
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(loginForm);
+
+            // Send login request
+            fetch('/login', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(data => {
+                            throw new Error(data.message || 'Login failed');
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Store token in session storage
+                    sessionStorage.setItem('token', data.token);
+
+                    // Redirect to the next URL if provided, otherwise to prediction page
+                    if (data.next_url) {
+                        window.location.href = data.next_url;
+                    } else {
+                        window.location.href = '/predict-page';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    loginError.classList.remove('hidden');
+                    errorMessage.textContent = error.message || 'An error occurred during login. Please try again.';
+                });
+        });
+    });
+</script>
+{% endblock %}
+

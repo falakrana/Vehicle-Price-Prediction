@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Vehicle Price Prediction{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6', // Blue
+                        secondary: '#0F172A', // Dark blue
+                        accent: '#06B6D4', // Cyan/teal
+                        tertiary: '#6366F1', // Indigo
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .form-input {
+            @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary;
+        }
+
+        .btn-primary {
+            @apply w-full bg-gradient-to-r from-primary to-accent text-white font-bold py-3 px-4 rounded-md hover:from-primary/90 hover:to-accent/90 transition duration-300;
+        }
+
+        .nav-link {
+            @apply px-4 py-2 text-gray-700 hover:text-primary transition duration-300;
+        }
+
+        .nav-link-active {
+            @apply px-4 py-2 text-primary font-semibold;
+        }
+
+        .glass-card {
+            @apply bg-white/80 backdrop-blur-sm shadow-lg rounded-lg;
+        }
+    </style>
+    {% block head %}{% endblock %}
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center">
+                        <div
+                        class="bg-gradient-to-r from-primary to-tertiary text-white font-bold px-4 py-4 rounded-full flex items-center justify-center w-10 h-10">
+                        FR</div>                        <!-- <div class="bg-gradient-to-r from-accent to-primary text-white font-bold px-3 py-1.5 rounded-r-md">PREDICT</div> -->
+                    </a>
+                </div>
+
+                <div class="hidden md:flex space-x-4">
+                    <a href="/"
+                        class="{% if request.path == '/' %}nav-link-active{% else %}nav-link{% endif %}">Home</a>
+                    <a href="/about"
+                        class="{% if request.path == '/about' %}nav-link-active{% else %}nav-link{% endif %}">About
+                        Us</a>
+                    <a href="/predict-page"
+                        class="{% if request.path == '/predict-page' %}nav-link-active{% else %}nav-link{% endif %}">Prediction</a>
+                    <a href="/contact"
+                        class="{% if request.path == '/contact' %}nav-link-active{% else %}nav-link{% endif %}">Contact
+                        Us</a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-4">
+                    {% if session.get('token') %}
+                    <a href="/logout" class="text-gray-700 hover:text-primary">Logout</a>
+                    {% else %}
+                    <a href="/login-page" class="text-gray-700 hover:text-primary">Login</a>
+                    <a href="/register-page"
+                        class="bg-gradient-to-r from-primary to-accent text-white px-4 py-2 rounded-md hover:from-primary/90 hover:to-accent/90 transition duration-300">Register</a>
+                    {% endif %}
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-primary focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden hidden pt-4 pb-2">
+                <a href="/" class="block py-2 px-4 text-gray-700 hover:text-primary">Home</a>
+                <a href="/about" class="block py-2 px-4 text-gray-700 hover:text-primary">About Us</a>
+                <a href="/predict-page" class="block py-2 px-4 text-gray-700 hover:text-primary">Prediction</a>
+                <a href="/contact" class="block py-2 px-4 text-gray-700 hover:text-primary">Contact Us</a>
+
+                <div class="pt-4 border-t border-gray-200 mt-2">
+                    {% if session.get('token') %}
+                    <a href="/logout" class="block py-2 px-4 text-gray-700 hover:text-primary">Logout</a>
+                    {% else %}
+                    <a href="/login-page" class="block py-2 px-4 text-gray-700 hover:text-primary">Login</a>
+                    <a href="/register-page" class="block py-2 px-4 text-gray-700 hover:text-primary">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-secondary to-secondary/90 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4">Vehicle Price Prediction</h3>
+                    <p class="text-gray-300">Get accurate price estimates for your vehicle based on machine learning.
+                    </p>
+                </div>
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="text-gray-300 hover:text-white">Home</a></li>
+                        <li><a href="/about" class="text-gray-300 hover:text-white">About Us</a></li>
+                        <li><a href="/predict-page" class="text-gray-300 hover:text-white">Prediction</a></li>
+                        <li><a href="/contact" class="text-gray-300 hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <p class="text-gray-300">Email: ranafalak18@gmail.com</p>
+                    <p class="text-gray-300">Phone: 972xxx6991</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center">
+                <p class="text-gray-300">&copy; 2025 Vehicle Price Prediction. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>
+
