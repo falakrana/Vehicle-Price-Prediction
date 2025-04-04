@@ -22,7 +22,6 @@ This is a web-based application that predicts the price of a vehicle based on va
 - **Backend**: Flask (Python)
 - **Database**: MongoDB Atlas
 - **Machine Learning**: Scikit-learn, Pandas, NumPy, Random-Forest
-- **Deployment**: Flask App (Localhost or Cloud)
 
 ---
 
